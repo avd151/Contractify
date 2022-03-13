@@ -1,0 +1,53 @@
+{% load static %} {% block body %} {% include 'cnav.html' %}
+
+<marquee
+  style="
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    color: white;
+    background-color: #2fa4ff;
+    margin-top: 1%;
+    font-weight: bold;
+  "
+>
+  Contracts Available to Bid
+</marquee>
+<hr />
+
+<div class="container">
+  <table class="table table-hover" id="example">
+    <thead>
+      <tr style="background-color: #000080; color: white">
+        <th>S.No.</th>
+        <th>Contract Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Budget</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in contract %}
+      <tr style="background-color: #deb887">
+        <td>{{forloop.counter}}</td>
+        <td>{{i.title}}</td>
+        <td>{{i.start_date}}</td>
+        <td>{{i.end_date}}</td>
+        <td>{{i.budget}}</td>
+        <td>{{i.location}}</td>
+        <td>{{i.description}}</td>
+        <td>
+          <a href="{% url 'apply_contract' forloop.counter %}" class="btn btn-success btn-sm"
+            >Apply</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% load static %} {% block body %} {% include 'gnav.html' %}
+
+<script>
+  function checkpass() {
+    alert("Contractor Selected Successfully..");
+    document.getElementById("accept").innerHTML = "Accepted";
+    //call blockchain code after this
+    return true;
+  }
+</script>
+
+<marquee
+  style="
+    font-family: 'Monotype Corsiva';
+    font-size: 25px;
+    color: white;
+    background-color: black;
+    margin-top: 1%;
+    font-weight: bold;
+  "
+>
+  List of Contractors who have Quoted for the Contract
+</marquee>
+<hr />
+
+<div class="container">
+  <table class="table table-hover" id="example">
+    <thead>
+      <tr style="background-color: #000080; color: white">
+        <th>S.No.</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Contact No</th>
+        <th>Bid Quoted</th>
+        <!-- todo: View pdf option - add -->
+        <!-- <th>Quoted Amount</th> -->
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in contractor %}
+      <tr style="background-color: #deb887">
+        <td>{{forloop.counter}}</td>
+        <td>{{i.user.first_name}}</td>
+        <td>{{i.user.last_name}}</td>
+        <td>{{i.user.username}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.amount}}</td>
+        <!-- <td>{{i.amount}}</td> -->
+        <td>
+          <a
+            href="#"
+            class="btn btn-success btn-sm"
+            id="accept"
+            onclick="return checkpass();"
+            >Accept</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

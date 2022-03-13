@@ -1,0 +1,84 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'cnav.html' %}
+
+<script>
+  function checkpass(){
+        alert('You have Successfully bidden for the Contract');
+        return true;
+  }
+</script>
+
+<marquee style="font-family : 'Monotype Corsiva' ; font-size : 25px ; color : white ; background-color : #2FA4FF ; margin-top : 1% ; font-weight : bold">
+  Confirm Quotation Details To Bid
+</marquee>
+<hr>
+
+<div class="container mt-5 ml-30">
+<div class="row">
+   <div class="col-md-12">
+    <form  name="signup" method='post' enctype="multipart/form-data">
+     {% csrf_token %}
+   <div class="form-row">
+    <div class="form-group col-md-6">
+       <label>Your First Name</label>
+       <input type="text" class="form-control" name="fname" value="{{contractor.user.first_name}}" readonly required>
+    </div>
+
+    <div class="form-group col-md-6">
+       <label>Your Last Name</label>
+       <input type="text" class="form-control" name="lname" value="{{contractor.user.last_name}}" readonly required>
+    </div>
+    </div>
+
+
+   <div class="form-row">
+    <div class="form-group col-md-12">
+       <label>Your Contact Details</label>
+       <input type="text" class="form-control" name="contact" value="{{contractor.mobile}}" readonly required>
+    </div>
+  </div>
+
+   <div class="form-row">
+    <div class="form-group col-md-12">
+       <label>Your Email ID</label>
+       <input type="text" class="form-control" name="email" value="{{contractor.user.username}}" readonly required>
+    </div>
+    </div>
+    
+       <div class="form-row">
+    <div class="form-group col-md-12">
+       <label>Quoted Amount</label>
+       <input type="text" class="form-control" name="amount" required>
+    </div>
+    </div>
+  
+
+   <div class="form-row">
+   <center><label>Add Quotation Document:</label><center>
+    <div class="form-group col-md-12">
+       <center> <input type="file" id="test" name="test" accept=".pdf,.doc" required><center>
+    </div>
+  </div>
+
+  <center><input type="submit" value = "Bid" class="btn btn-primary my-3" style="width : 200px"></center>
+</form>
+</div>
+</div>
+</div>
+{% ifequal error "no" %}
+<script>
+    alert("You have successfully applied for the Contract");
+    window.location = ('{% url "contractor_contractslist" %}')
+</script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+<script>
+    alert("Something went Wrong,Try again...");
+</script>
+{% endifequal %}
+
+{% endblock %}
